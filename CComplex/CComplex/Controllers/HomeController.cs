@@ -16,8 +16,46 @@ namespace CComplex.Controllers
         
         // POST: Home
         [HttpPost]
-        public ActionResult Index(string bt)
+        public ActionResult Index(string bt, string visor)
         {
+            switch (bt)
+            {
+                case "0":
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                    if (visor.Equals("0"))
+                        visor = bt;
+                    else
+                        visor += bt;
+                    break;
+                case "C":
+                    visor = "0";
+                    break;
+                case "x":
+                case "+":
+                case "-":
+                    break;
+                case ":":
+                    break;
+                case "=":
+                    break;
+                case "+/-":
+                    visor = (visor[0] == '-') ? (visor.Substring(1)) : ("-" + visor); 
+                    break;
+                case ",":
+                    if(!visor.Contains(";"))
+                        visor = visor + ",";
+                    break;
+            }
+            //enviar dados para a view.
+            ViewBag.Visor = visor;
             return View();
         }
     }
