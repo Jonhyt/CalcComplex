@@ -11,6 +11,7 @@ namespace CComplex.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            Session["operador"] = "";
             return View();
         }
         
@@ -41,8 +42,12 @@ namespace CComplex.Controllers
                 case "x":
                 case "+":
                 case "-":
-                    break;
                 case ":":
+                    if ((string)Session["operador"] == "")
+                    {
+                        Session["operando"] = visor;
+                        Session["operador"] = bt;
+                    }
                     break;
                 case "=":
                     break;
